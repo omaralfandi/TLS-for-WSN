@@ -1,0 +1,30 @@
+typedef struct cmc_sock_t {
+
+uint8_t sync_state ;
+uint8_t com_state ;
+
+/* the local id unique to every node */
+uint16_t local_id ;
+
+uint16_t group_id ;
+/* buffer , for message construction */
+uint16_t last_dst ;
+uint8_t last_msg [ CMC_DATAFIELD_SIZE ];
+uint8_t last_msg_len ;
+uint8_t * add_data ;
+uint8_t add_data_len ;
+/* this connections private and public key */
+NN_DIGIT * private_key ;
+Point public_key ;
+uint8_t master_key [ CMC_CC_SIZE ];
+/* hold this nodes counter */
+union {
+uint64_t ccounter ;
+uint16_t ccounter_compound [4];
+};
+/* number of times to retry action */
+uint8_t retry_counter ;
+
+/* time to next retry */
+uint16_t retry_timer ;
+} cmc_sock_t ;
